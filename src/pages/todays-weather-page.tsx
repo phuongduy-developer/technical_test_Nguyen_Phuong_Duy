@@ -111,7 +111,7 @@ export function TodaysWeatherPage() {
               src={sun}
               alt="background"
               aria-hidden
-              className="pointer-events-none z-50 absolute -right-7 top-0 -translate-y-1/2 w-56 h-50 sm:w-70.5 sm:h-63"
+              className="pointer-events-none z-50 absolute right-0 sm:-right-7 top-0 -translate-y-1/2 w-37 h-33 sm:w-70.5 sm:h-62.75"
             />
           </CardHeader>
           <CardContent className="flex flex-col gap-6 sm:px-7 px-4 py-6 pt-0 text-left">
