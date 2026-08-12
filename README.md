@@ -4,9 +4,8 @@ A React + TypeScript + Vite app that shows current weather for a city/country se
 
 ## Setup
 
-1. Get a free API key at <https://openweathermap.org/api> (Current Weather Data).
-2. Copy `.env.example` to `.env` and fill in `VITE_OPENWEATHER_API_KEY` (and `VITE_BASE_URL` if different from the default).
-3. Install dependencies and run the dev server:
+1. Copy `.env.example` to `.env` (adjust `VITE_BASE_URL` if needed — no API key setup required, it's already wired in).
+2. Install dependencies and run the dev server:
 
    ```bash
    pnpm install
