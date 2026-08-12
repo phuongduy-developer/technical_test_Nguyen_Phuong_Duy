@@ -103,7 +103,7 @@ export function TodaysWeatherPage() {
           isLoading={isPending}
         />
       </div>
-      <div className="relative z-10 flex mt-40 justify-center">
+      <div className="relative z-10 flex mt-10 sm:mt-40 justify-center">
         <Card className="relative w-full max-w-2xl gap-0 overflow-visible border border-white dark:border-none bg-[#b6a1e6] dark:bg-[#4d3692] p-0 shadow-none ring-0">
           <CardHeader className="relative flex flex-row items-start justify-between gap-2 sm:px-7 px-4 py-5">
             <p className="text-[16px] font-medium text-foreground">Today's Weather</p>
