@@ -18,14 +18,14 @@ export function SearchHistoryList({
   const [confirmingId, setConfirmingId] = useState<string | null>(null)
 
   return (
-    <div className="flex flex-col gap-3 rounded-[24px] bg-[rgba(255,255,255,20%)] p-5 dark:bg-[rgba(26,26,26,30%)]">
+    <div className="flex flex-col gap-3 rounded-[24px] bg-[rgba(255,255,255,20%)] dark:bg-[rgba(26,26,26,30%)] p-5">
       <p className="text-base font-semibold text-foreground">Search History</p>
       {history.length === 0 ? (
         <p className="rounded-2xl border border-dashed border-[#6C40B5]/30 py-12 text-center text-sm text-[#3d1f7a] dark:border-white/20 dark:text-white/70">
           No Record
         </p>
       ) : (
-        <ul className="scrollbar flex max-h-96 flex-col gap-3 overflow-y-auto pr-0.5">
+        <ul className="scrollbar flex max-h-96 flex-col gap-3 overflow-y-auto sm:pr-0.5 pr-1.5">
           {history.map((entry) => (
             <SearchHistoryItem
               key={entry.id}

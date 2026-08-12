@@ -27,7 +27,7 @@ export function SearchHistoryItem({
   onCancelDelete,
 }: SearchHistoryItemProps) {
   const activeBadge = isActive && (
-    <span className="ml-2 rounded-full bg-[#3d1f7a]/10 px-2 py-0.5 text-xs font-medium text-[#3d1f7a] dark:bg-white/20 dark:text-white">
+    <span className="ml-2 hidden sm:inline-block w-max rounded-full bg-[#3d1f7a]/10 px-2 py-0.5 text-xs font-medium text-[#3d1f7a] dark:bg-white/20 dark:text-white">
       Showing
     </span>
   )
@@ -60,10 +60,10 @@ export function SearchHistoryItem({
   return (
     <li
       className={cn(
-        "rounded-2xl border-2 border-transparent px-5 py-4 text-sm transition-colors",
+        "rounded-2xl border-2 border-transparent px-5 py-4 text-sm transition-colors ",
         isConfirming
-          ? "bg-destructive/10"
-          : "bg-white/25 hover:bg-white/35 dark:bg-white/10 dark:hover:bg-white/15",
+          ? "border-destructive/40 bg-destructive/15 dark:border-destructive/50 dark:bg-destructive/20"
+          : "bg-[rgba(255,255,255,40%)] dark:bg-[rgba(26,26,26,40%)] hover:bg-white/35 dark:hover:bg-white/15",
         isActive && !isConfirming && "border-[#3d1f7a]/70 dark:border-white/60"
       )}
     >
@@ -73,13 +73,16 @@ export function SearchHistoryItem({
             {entry.label}
           </span>
           <div className="flex shrink-0 items-center gap-2">
-            <span className="text-xs text-[#7a1f2b] dark:text-red-300">Delete this entry?</span>
+            <span className="text-xs font-medium text-[#7a1f2b] dark:text-red-200 hidden sm:block">
+              Delete this entry?
+            </span>
             <Button
               type="button"
               size="icon-sm"
               variant="destructive"
               aria-label={`Confirm delete ${entry.label}`}
               onClick={onConfirmDelete}
+              className="size-9 rounded-full bg-red-600 text-white shadow-sm hover:bg-red-700 dark:bg-red-500 dark:hover:bg-red-600"
             >
               <Check />
             </Button>
@@ -89,8 +92,9 @@ export function SearchHistoryItem({
               variant="ghost"
               aria-label="Cancel delete"
               onClick={onCancelDelete}
+              className={iconButtonClass}
             >
-              <X />
+              <X className="text-[#808080] dark:text-[#9390A0]" />
             </Button>
           </div>
         </div>

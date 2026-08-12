@@ -1,7 +1,7 @@
 import type { OpenWeatherResponse } from "./type";
 
 const API_BASE_URL = import.meta.env.VITE_BASE_URL;
-const API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY;
+const API_KEY = '7502fae35c731e3ecea1e5f2dc0dd0ad'
 
 export class WeatherApiError extends Error {}
 
