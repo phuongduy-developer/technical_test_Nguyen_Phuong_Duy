@@ -1,4 +1,4 @@
-import { useState, type ChangeEvent } from "react"
+import { useState, type SubmitEvent } from "react"
 import bgLight from "@/assets/bg-light.webp"
 import bgDark from "@/assets/bg-dark.webp"
 import sun from "@/assets/sun.webp"
@@ -12,7 +12,7 @@ import { useTheme } from "@/hooks/use-theme"
 import { useWeatherMutation } from "@/hooks/use-weather-mutation"
 import { buildLocationLabel } from "@/lib/weather-label"
 import { WeatherApiError } from "@/api/weather"
-import type { SearchHistoryEntry } from "@/api/type"
+import type { SearchHistoryEntry } from "@/types/weather"
 
 export function TodaysWeatherPage() {
   const [city, setCity] = useState("")
@@ -24,7 +24,6 @@ export function TodaysWeatherPage() {
   const { data, isPending, isError, reset, mutateAsync, error: weatherError } = useWeatherMutation()
 
   const weather = data ?? null
-  const isLoading = isPending
   const error =
     validationError ??
     (isError
@@ -56,7 +55,7 @@ export function TodaysWeatherPage() {
     }
   }
 
-  function handleSubmit(event: ChangeEvent<HTMLFormElement>) {
+  function handleSubmit(event: SubmitEvent<HTMLFormElement>) {
     event.preventDefault()
     void runSearch(city, country)
   }
@@ -96,12 +95,12 @@ export function TodaysWeatherPage() {
           onCountryChange={setCountry}
           onSubmit={handleSubmit}
           onClear={handleClear}
-          isLoading={isLoading}
+          isLoading={isPending}
         />
       </div>
       <div className="relative z-10 flex mt-40 justify-center">
         <Card className="relative w-full max-w-2xl gap-0 overflow-visible border border-white dark:border-none bg-[#b6a1e6] dark:bg-[#4d3692] p-0 shadow-none ring-0">
-          <CardHeader className="relative flex flex-row items-start justify-between gap-2 px-7 py-5">
+          <CardHeader className="relative flex flex-row items-start justify-between gap-2 sm:px-7 px-4 py-5">
             <p className="text-[16px] font-medium text-foreground">Today's Weather</p>
             <img
               src={sun}
@@ -110,8 +109,8 @@ export function TodaysWeatherPage() {
               className="pointer-events-none z-50 absolute right-0 top-0 -translate-y-1/2 w-56 h-50 sm:w-70.5 sm:h-63"
             />
           </CardHeader>
-          <CardContent className="flex flex-col gap-6 px-7 py-6 pt-0 text-left">
-            <WeatherSummary weather={weather} error={error} isLoading={isLoading} />
+          <CardContent className="flex flex-col gap-6 sm:px-7 px-4 py-6 pt-0 text-left">
+            <WeatherSummary weather={weather} error={error} isLoading={isPending} />
             <SearchHistoryList
               history={history}
               activeLabel={activeLabel}

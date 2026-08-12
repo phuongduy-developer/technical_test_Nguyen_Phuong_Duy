@@ -1,4 +1,4 @@
-import type { ChangeEvent } from "react"
+import type { SubmitEvent } from "react"
 import { Loader2, Search, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -9,7 +9,7 @@ interface WeatherSearchFormProps {
   country: string
   onCityChange: (value: string) => void
   onCountryChange: (value: string) => void
-  onSubmit: (event: ChangeEvent<HTMLFormElement>) => void
+  onSubmit: (event: SubmitEvent<HTMLFormElement>) => void
   onClear: () => void
   isLoading: boolean
 }

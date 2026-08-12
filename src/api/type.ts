@@ -40,11 +40,5 @@ interface OpenWeatherResponse {
   name: string;
   cod: number;
 }
-interface SearchHistoryEntry {
-  id: string;
-  city: string;
-  country: string;
-  label: string;
-  searchedAt: number;
-}
-export type { OpenWeatherResponse, SearchHistoryEntry };
+
+export type { OpenWeatherResponse };

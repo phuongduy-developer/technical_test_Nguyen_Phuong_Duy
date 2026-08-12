@@ -39,25 +39,46 @@ export function WeatherSummary({ weather, error, isLoading }: WeatherSummaryProp
     )
   }
 
-  return (
-    <div>
+  const temperatureBlock = (
+    <>
       <p className="text-7xl font-extrabold tracking-tight text-[#6C40B5] sm:text-8xl dark:text-[#c9b6ff]">
         {Math.round(weather.main.temp)}°
       </p>
       <p className="mt-1 text-sm text-foreground">
         H: {Math.round(weather.main.temp_max)}° L: {Math.round(weather.main.temp_min)}°
       </p>
-      <div className="mt-2.5 flex flex-wrap items-center gap-x-6 gap-y-1.5 text-sm dark:border-white/15 text-[#666] dark:text-white">
-        <span className="font-bold">
-          {weather.name}, {weather.sys.country}
-        </span>
-        <span>
-          {formatDateTime(new Date(weather.dt * 1000))}
-        </span>
-        <span>Humidity: {weather.main.humidity}%</span>
-        <span className="ml-auto sm:ml-0">
-          {weather.weather[0]?.main}
-        </span>
+    </>
+  )
+
+  return (
+    <div>
+      {/* Mobile: */}
+      <div className="flex items-center justify-between gap-4 sm:hidden">
+        <div className="min-w-0">
+          {temperatureBlock}
+          <p className="mt-1 truncate text-sm font-bold text-foreground">
+            {weather.name}, {weather.sys.country}
+          </p>
+        </div>
+        <div className="flex shrink-0 flex-col items-end gap-1 text-right text-sm text-[#666] dark:text-white/80">
+          <span>{weather.weather[0]?.main}</span>
+          <span className="capitalize">{weather.weather[0]?.description}</span>
+          <span>Humidity: {weather.main.humidity}%</span>
+          <span>{formatDateTime(new Date(weather.dt * 1000))}</span>
+        </div>
+      </div>
+
+      {/* Desktop: */}
+      <div className="hidden sm:block">
+        {temperatureBlock}
+        <div className="mt-2.5 flex flex-wrap items-center justify-between gap-x-6 gap-y-1.5 text-sm text-[#666] dark:text-white/80">
+          <span className="font-bold text-foreground">
+            {weather.name}, {weather.sys.country}
+          </span>
+          <span>{formatDateTime(new Date(weather.dt * 1000))}</span>
+          <span>Humidity: {weather.main.humidity}%</span>
+          <span className="capitalize">{weather.weather[0]?.description}</span>
+        </div>
       </div>
     </div>
   )

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
-import type { SearchHistoryEntry } from "@/api/type"
 import { buildLocationLabel } from "@/lib/weather-label"
+import type { SearchHistoryEntry } from "@/types/weather"
 
 const STORAGE_KEY = "weather-search-history"
 

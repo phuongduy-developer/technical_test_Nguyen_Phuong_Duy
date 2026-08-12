@@ -5,5 +5,5 @@ export function formatDateTime(date: Date): string {
 }
 
 export function formatTime(date: Date): string {
-  return format(date, "hh:mm:ss a")
+  return format(date, "MM-dd-yyyy hh:mmaaa")
 }
