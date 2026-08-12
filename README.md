@@ -1,75 +1,34 @@
-# React + TypeScript + Vite
+# Today's Weather
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React + TypeScript + Vite app that shows current weather for a city/country search, backed by the OpenWeatherMap Current Weather API, with a persisted search history and a light/dark theme switcher.
 
-Currently, two official plugins are available:
+## Setup
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+1. Get a free API key at <https://openweathermap.org/api> (Current Weather Data).
+2. Copy `.env.example` to `.env` and fill in `VITE_OPENWEATHER_API_KEY` (and `VITE_BASE_URL` if different from the default).
+3. Install dependencies and run the dev server:
 
-## React Compiler
+   ```bash
+   pnpm install
+   pnpm dev
+   ```
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+   The dev server runs on port 3000.
 
-## Expanding the ESLint configuration
+## Scripts
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- `pnpm dev` — start the dev server
+- `pnpm build` — type-check and build for production
+- `pnpm lint` — run ESLint
+- `pnpm preview` — preview the production build locally
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## UI behavior assumptions
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
-```
+- **Country field** expects a 2-letter ISO 3166 country code (e.g. `MY`, `JP`, `KR`), matching OpenWeatherMap's `q=city,countryCode` query param. It's optional — city alone is a valid search.
+- **Temperature** is requested in Celsius (`units=metric`) and shown rounded.
+- **Search** adds/moves the query to the top of Search History and de-duplicates by `city, country` (case-insensitive) so repeat searches don't create duplicate rows.
+- **Clear** resets the City/Country inputs and the currently displayed weather/error; it does not touch Search History (history rows have their own delete button for that).
+- **Search history** persists in `localStorage` so it survives page reloads.
+- **Invalid input** (city/country not found, or empty city) shows an inline error message in place of the weather card instead of a blocking alert.
+- Includes a light/dark **theme toggle**, persisted in `localStorage`.
+- Layout is responsive: the form fields and history rows stack/wrap for narrow (mobile) widths and align in a row on wider screens.
